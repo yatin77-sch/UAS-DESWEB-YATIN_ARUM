@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en" class="lvc-root-container">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECH RIDER Indonesia - Motorcycle Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Chakra+Petch:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Tailwind CSS configuration
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'deep-navy': '#1A374D',
+                        'royal-sapphire': '#406882',
+                        'elegant-azure': '#6998AB',
+                        'soft-sky-blue': '#B1D4E0',
+                        'platinum-gray': '#F5F5F5'
+                    },
+                    animation: {
+                        'modal-in': 'modal-in 0.4s ease-out',
+                        'modal-out': 'modal-out 0.4s ease-in',
+                    },
+                    keyframes: {
+                        'modal-in': {
+                            '0%': { transform: 'scale(0.7)', opacity: '0' },
+                            '100%': { transform: 'scale(1)', opacity: '1' }
+                        },
+                        'modal-out': {
+                            '0%': { transform: 'scale(1)', opacity: '1' },
+                            '100%': { transform: 'scale(0.7)', opacity: '0' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .mySlides {
+      display: none;
+      position: relative;
+      width: 100%;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+
+    .navbar-item {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      transition-property: background-color, color;
+      transition-duration: 300ms;
+    }
+
+    .navbar-item:hover {
+      background-color: #203764;
+      color: white;
+    }
+
+    .information {
+      margin-left: 7%;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .test-ride-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+        /* Unique Palette and Gradients */
+        .lvc-deep-midnight { background-color: #0A2342; }
+        .lvc-electric-blue { background-color: #2E86C1; }
+        .lvc-titanium-silver { background-color: #85929E; }
+        .lvc-carbon-gray { background-color: #2C3E50; }
+        .lvc-frost-white { background-color: #F4F6F7; }
+
+        /* Unique Typography and Layout */
+        .lvc-root-container {
+            font-family: 'Chakra Petch', sans-serif;
+            background: linear-gradient(135deg, #2E86C1 0%, #F4F6F7 100%);
+            overflow-x: hidden;
+        }
+
+        /* Rest of the CSS remains the same as in the previous artifact */
+        .lvc-header-gradient {
+            background: linear-gradient(45deg, #0A2342, #2E86C1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lvc-vehicle-card {
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            transform-style: preserve-3d;
+            border: 2px solid rgba(46, 134, 193, 0.2);
+            box-shadow: 0 15px 35px rgba(46, 134, 193, 0.1);
+        }
+
+        .lvc-vehicle-card:hover {
+            transform: translateY(-20px) perspective(500px) rotateX(7deg);
+            box-shadow: 0 25px 55px rgba(46, 134, 193, 0.3);
+        }
+
+        .lvc-category-button {
+            background: linear-gradient(to right, #0A2342, #2E86C1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.6s ease;
+        }
+
+        .lvc-category-button:hover {
+            transform: skewX(-10deg) scale(1.05);
+        }
+
+        .lvc-category-active {
+            background: linear-gradient(to right, #2E86C1, #85929E);
+        }
+
+        .lvc-modal-overlay {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes lvc-sophisticated-entrance {
+            from { opacity: 0; transform: translateY(80px) rotate(5deg); }
+            to { opacity: 1; transform: translateY(0) rotate(0); }
+        }
+
+        .lvc-entrance-animation {
+            animation: lvc-sophisticated-entrance 1.2s ease-out;
+        }
+        @keyframes skewAnimation {
+            0% { transform: skew(0deg); }
+            50% { transform: skew(-10deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        @keyframes flipAnimation {
+            0% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+            100% { transform: rotateY(360deg); }
+        }
+
+        @keyframes scaleAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .dealer-location {
+            background: linear-gradient(135deg, #B1D4E0, #F5F5F5);
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.5s ease;
+        }
+
+        .dealer-image {
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .dealer-image:hover {
+            transform: scale(1.03) translateY(-10px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.15);
+            animation: skewAnimation 1.5s infinite;
+        }
+
+        .dealer-section {
+            background: linear-gradient(to right, #406882, #6998AB);
+            border-radius: 15px;
+            transition: all 0.5s ease;
+        }
+
+        .info-card {
+            background: rgba(255,255,255,0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            animation: scaleAnimation 3s infinite;
+        }
+
+        .action-button {
+            background: #1A374D;
+            color: #B1D4E0;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+        }
+
+        .action-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: #406882;
+        }
+        .interactive-news {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #F5F5F5 0%, #B1D4E0 100%);
+        }
+        .modal-overlay {
+            background: rgba(26, 55, 77, 0.7);
+            backdrop-filter: blur(5px);
+        }
+        .btn-elegant {
+            background: linear-gradient(to right, #406882, #1A374D);
+            transition: all 0.4s ease;
+        }
+        .btn-elegant:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(64,104,130,0.4);
+        }
+        /* Mobile Responsive Media Queries */
+
+@media screen and (max-width: 768px) {
+    /* Header Section */
+    header .container {
+        flex-direction: column;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    header .flex {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    header nav {
+        margin-top: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    header .navbar-item {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    header .flex.items-center:last-child {
+        margin-top: 1rem;
+    }
+
+    /* Slideshow */
+    .slideshow-container .mySlides .information {
+        padding: 1rem;
+    }
+
+    .slideshow-container .mySlides h1 {
+        font-size: 2rem;
+    }
+
+    .slideshow-container .mySlides h2 {
+        font-size: 1.5rem;
+    }
+
+    .slideshow-container .mySlides .mt-4 {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .slideshow-container .prev,
+    .slideshow-container .next {
+        display: none; /* Optional: hide arrows on mobile */
+    }
+
+    /* TVS Products Section */
+    .lvc-category-button {
+        margin-bottom: 0.5rem;
+    }
+
+    #lvcVehicleGrid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1rem;
+    }
+
+    /* Dealer Location Section */
+    .dealer-location .flex {
+        flex-direction: column;
+    }
+
+    .dealer-location .md\:w-1\/2 {
+        width: 100%;
+    }
+
+    .dealer-location .action-button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Interactive News Section */
+    .interactive-news .grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 1rem;
+    }
+
+    /* Modal Responsiveness */
+    .modal-overlay .bg-white {
+        width: 95%;
+        margin: 0 auto;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    /* Test Ride Modal */
+    #testRideModal .bg-white {
+        width: 95%;
+        margin: 0 auto;
+        padding: 1rem;
+    }
+
+    #testRideModal form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mySlides {
+        height: auto;
+        min-height: 50vh;
+    }
+
+    .mySlides .absolute {
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .mySlides h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .mySlides h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .mySlides .mt-4 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mySlides .mt-4 .bg-red-600,
+    .mySlides .mt-4 .bg-blue-600 {
+        margin: 10px 0;
+        width: 100%;
+        max-width: 250px;
+    }
+
+}
+
+/* Additional Mobile Tweaks */
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 14px; /* Smaller base font size for very small screens */
+    }
+
+    .slideshow-container .mySlides h1 {
+        font-size: 1.5rem;
+    }
+
+    .slideshow-container .mySlides h2 {
+        font-size: 1.2rem;
+    }
+
+    .lvc-header-gradient {
+        font-size: 2.5rem;
+    }
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+}
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white">
+      <div class="container mx-auto flex justify-between items-center py-4 px-8">
+        <div class="flex items-center">
+          <img src="1.jpg" alt="TVS logo" class="h-16 mr-2" />
+          <span class="text-sm">TECH RIDER SOLO</span>
+        </div>
+        <nav class="flex items-center space-x-4">
+          <a href="index.html" class="navbar-item">HOME</a>
+          <a href="product(2).html" class="navbar-item">PRODUCTS</a>
+          <a href="about us.html" class="navbar-item">ABOUT</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+          <a href="tel:08001900700" class="text-sm">BEBAS-PULSA - 0800 1 900 700</a>
+          <a href="#" class="text-sm" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-sm" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Main Content -->
+    <main class="relative">
+      <div class="slideshow-container">
+        <!-- Slide 1: TVS Callisto 125 -->
+        <div class="mySlides">
+          <img src="Banner web1.jpg" alt="TVS CALLISTO 125" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS CALLISTO 125</h1>
+            <h2 class="text-2xl font-semibold">UPLIFT YOUR JOURNEY</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-callisto-125-premium" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 2: TVS NTORQ 125 Race XP -->
+        <div class="mySlides">
+          <img src="web banner2.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS NTORQ 125 RACE XP</h1>
+            <h2 class="text-2xl font-semibold">PLAY SMART</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-ntorq-125-xp" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Additional Slides with similar structure -->
+        <!-- Slide 3, 4, 5 would be similar to the above -->
+        <div class="mySlides">
+          <img src="Web-Banner-Aksesoris-PC.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS CALLISTO</h1>
+            <h2 class="text-2xl font-semibold">ACCESSORIES COLLECTION</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides">
+          <img src="TVS RONIN.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS RONIN</h1>
+            <h2 class="text-2xl font-semibold">#UNSCRIPTED LIFE</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-ronin-nimbus" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides">
+          <img src="TVS KING CARGO.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS KING KARGO</h1>
+            <h2 class="text-2xl font-semibold">SATU KARGO BANYAK KEGUNAAAN</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Navigation Arrows -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+  
+      <!-- Dot Navigation -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+      </div>
+    </main>
+  
+    <!-- Test Ride Modal -->
+    <div id="testRideModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+      <div class="bg-white p-8 rounded-lg w-full max-w-md mx-4">
+        <h2 class="text-2xl font-bold mb-4">Test Ride Booking</h2>
+        <form id="testRideForm" class="space-y-4">
+          <div>
+            <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
+            <input type="text" id="nama" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Ketik Nama Anda" />
+          </div>
+          <div>
+            <label for="nomor-hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+            <input type="tel" id="nomor-hp" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan Nomor HP Anda" />
+          </div>
+          <div>
+            <label for="kota" class="block text-sm font-medium text-gray-700">Kota</label>
+            <input type="text" id="kota" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Pilih Kota Anda" />
+          </div>
+          <div>
+            <label for="dealer" class="block text-sm font-medium text-gray-700">Dealer</label>
+            <input type="text" id="dealer" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Pilih Dealer Anda" />
+          </div>
+          <div>
+            <label for="pilih-motor" class="block text-sm font-medium text-gray-700">Pilih Motor</label>
+            <select id="pilih-motor" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+              <option value="">Pilih Motor</option>
+              <option>TVS Callisto 125</option>
+              <option>TVS NTORQ 125 Race XP</option>
+            </select>
+          </div>
+          <div>
+            <label for="pesan" class="block text-sm font-medium text-gray-700">Pesan</label>
+            <textarea id="pesan" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan Pesan Anda"></textarea>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" onclick="closeTestRideModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded">Batal</button>
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded">Kirim</button>
+          </div>
+        </form>
+      </div>
+    </div>
+<section class="p-8 lvc-entrance-animation">
+    <div class="container mx-auto">
+        <h1 class="lvc-header-gradient text-center text-6xl font-bold mb-16 tracking-wide uppercase font-orbitron">
+            TVS PRODUCTS
+        </h1>
+
+        <div class="flex flex-wrap justify-center gap-4 mb-16">
+            <button onclick="lvcFilterVehicles('all')" class="lvc-category-button text-white px-6 py-3 rounded-full shadow-2xl lvc-category-btn lvc-category-active" data-category="all">
+                ALL VEHICLES
+            </button>
+            <button onclick="lvcFilterVehicles('matic')" class="lvc-category-button text-white px-6 py-3 rounded-full shadow-2xl lvc-category-btn" data-category="matic">
+                MATIC
+            </button>
+            <button onclick="lvcFilterVehicles('sport')" class="lvc-category-button text-white px-6 py-3 rounded-full shadow-2xl lvc-category-btn" data-category="sport">
+                SPORT
+            </button>
+            <button onclick="lvcFilterVehicles('three-wheeler')" class="lvc-category-button text-white px-6 py-3 rounded-full shadow-2xl lvc-category-btn" data-category="three-wheeler">
+                THREE WHEELERS
+            </button>
+        </div>
+
+        <div id="lvcVehicleGrid" class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <!-- Vehicle Cards Will Be Dynamically Added Here -->
+        </div>
+    </div>
+
+    <!-- Vehicle Details Modal -->
+    <div id="lvcVehicleModal" class="lvc-modal-overlay fixed z-50 inset-0 hidden items-center justify-center">
+        <div class="bg-white rounded-2xl p-8 max-w-xl w-full shadow-2xl relative">
+            <button onclick="lvcCloseModal()" class="absolute top-4 right-4 text-3xl text-gray-600 hover:text-red-500">&times;</button>
+            <h2 id="lvcModalTitle" class="text-3xl font-bold text-center mb-6"></h2>
+            <img id="lvcModalImage" src="" alt="Vehicle" class="w-full h-80 object-cover rounded-lg mb-6">
+            
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <div>
+                    <p class="font-semibold text-blue-700">Price:</p>
+                    <p id="lvcModalPrice" class="text-xl"></p>
+                </div>
+                <div>
+                    <p class="font-semibold text-blue-700">Specifications:</p>
+                    <p id="lvcModalSpecs" class="text-xl"></p>
+                </div>
+            </div>
+            
+            <button onclick="lvcContactDealer()" class="w-full bg-blue-600 text-white py-4 rounded-full hover:bg-blue-800 transition-all">
+                Contact Elite Dealer
+            </button>
+        </div>
+    </div>
+</section>
+<section class="dealer-location min-h-screen flex items-center justify-center">
+    <div class="container mx-auto p-8">
+        <div class="dealer-section p-8 rounded-xl shadow-2xl">
+            <h1 class="text-center text-4xl font-bold text-white mb-8 tracking-wide uppercase">
+                Dealer Location
+            </h1>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <div class="md:w-1/2 dealer-image transform hover:scale-105 transition-all duration-500">
+                    <img 
+                        src="dealer gedung.jpg" 
+                        alt="Dealer Building" 
+                        class="w-full h-auto rounded-xl shadow-lg hover:shadow-2xl transition-all duration-500"
+                    >
+                </div>
+                
+                <div class="md:w-1/2 info-card p-6">
+                    <h2 class="text-2xl font-semibold text-deep-navy mb-4">Dealer Information</h2>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-royal-sapphire mr-4"></i>
+                            <span>123 Automotive Street, City, Country</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-royal-sapphire mr-4"></i>
+                            <span>+62 (123) 456-7890</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-royal-sapphire mr-4"></i>
+                            <span>contact@dealerlocation.com</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 flex space-x-4">
+                        <button onclick="showMap()" class="action-button px-6 py-3 hover:bg-royal-sapphire">
+                            <i class="fas fa-map"></i> View Map
+                        </button>
+                        <button onclick="contactDealer()" class="action-button px-6 py-3 hover:bg-royal-sapphire">
+                            <i class="fas fa-phone"></i> Contact Us
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="interactive-news min-h-screen flex flex-col justify-center">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-center text-3xl font-bold text-deep-navy mb-12">
+            INTERACTIVE NEWS SESSION
+        </h1>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            <!-- First Card -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden group" data-modal-id="scooterModal">
+                <div class="relative overflow-hidden">
+                    <img 
+                        src="CALLISTO 110 LIMITED.webp" 
+                        alt="Blue Scooter Exhibition" 
+                        class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    >
+                </div>
+                <div class="p-6">
+                    <p class="text-center text-elegant-azure font-semibold">Scooter Exhibition</p>
+                    <button class="modal-trigger mt-4 w-full py-2 text-white rounded-full btn-elegant">
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Second Card -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden group" data-modal-id="motorcycleEventModal">
+                <div class="relative overflow-hidden">
+                    <img 
+                        src="event.jpg" 
+                        alt="Motorcycle Event" 
+                        class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    >
+                </div>
+                <div class="p-6">
+                    <p class="text-center text-elegant-azure font-semibold">Motorcycle Event</p>
+                    <button class="modal-trigger mt-4 w-full py-2 text-white rounded-full btn-elegant">
+                        Explore More
+                    </button>
+                </div>
+            </div>
+
+            <!-- Third Card -->
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden group" data-modal-id="streetRideModal">
+                <div class="relative overflow-hidden">
+                    <img 
+                        src="street.jpg" 
+                        alt="Street Motorcycle Ride" 
+                        class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                    >
+                </div>
+                <div class="p-6">
+                    <p class="text-center text-elegant-azure font-semibold">Street Motorcycle Ride</p>
+                    <button class="modal-trigger mt-4 w-full py-2 text-white rounded-full btn-elegant">
+                        Read Article
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlays -->
+    <div id="scooterModal" class="fixed inset-0 z-50 hidden modal-overlay items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto animate-modal-in">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-deep-navy">Blue Scooter Exhibition</h2>
+                    <button class="modal-close text-2xl text-royal-sapphire hover:text-red-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <img 
+                    src="https://storage.googleapis.com/a1aa/image/nsD1uwcMrrYeXqlnp22tem6BcQyhfwrofnB0fZynwbun0dTfE.jpg" 
+                    alt="Blue Scooter Exhibition" 
+                    class="w-full h-64 object-cover rounded-xl mb-6"
+                >
+                <p class="text-elegant-azure mb-4">
+                    Discover the latest innovations in urban mobility at our exclusive Blue Scooter Exhibition. 
+                    Featuring cutting-edge designs and sustainable transportation solutions, this event showcases 
+                    the future of eco-friendly urban commuting.
+                </p>
+                <div class="flex space-x-4">
+                    <button class="px-6 py-2 bg-royal-sapphire text-white rounded-full hover:bg-deep-navy transition-colors">
+                        Book Tickets
+                    </button>
+                    <button class="px-6 py-2 border-2 border-royal-sapphire text-royal-sapphire rounded-full hover:bg-royal-sapphire hover:text-white transition-colors">
+                        Learn More
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="motorcycleEventModal" class="fixed inset-0 z-50 hidden modal-overlay items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto animate-modal-in">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-deep-navy">Motorcycle Event Showcase</h2>
+                    <button class="modal-close text-2xl text-royal-sapphire hover:text-red-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <img 
+                    src="https://storage.googleapis.com/a1aa/image/KtrnJmy9Kd70HlKzvPO6T3jOI9vZOdP5WvcgQ7PB3ryo7meJA.jpg" 
+                    alt="Motorcycle Event" 
+                    class="w-full h-64 object-cover rounded-xl mb-6"
+                >
+                <p class="text-elegant-azure mb-4">
+                    Join us for an extraordinary motorcycle event that brings together enthusiasts, 
+                    manufacturers, and riders from around the region. Experience the latest motorcycle 
+                    technologies, custom builds, and exciting rider communities.
+                </p>
+                <div class="flex space-x-4">
+                    <button class="px-6 py-2 bg-royal-sapphire text-white rounded-full hover:bg-deep-navy transition-colors">
+                        Register Now
+                    </button>
+                    <button class="px-6 py-2 border-2 border-royal-sapphire text-royal-sapphire rounded-full hover:bg-royal-sapphire hover:text-white transition-colors">
+                        Event Details
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="streetRideModal" class="fixed inset-0 z-50 hidden modal-overlay items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto animate-modal-in">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-deep-navy">Street Motorcycle Ride</h2>
+                    <button class="modal-close text-2xl text-royal-sapphire hover:text-red-500">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <img 
+                    src="https://storage.googleapis.com/a1aa/image/e3XF2BPaeCsx70YEyHQhtYXDnfe01HgQX1Wpy08JRiQJ6upPB.jpg" 
+                    alt="Street Motorcycle Ride" 
+                    class="w-full h-64 object-cover rounded-xl mb-6"
+                >
+                <p class="text-elegant-azure mb-4">
+                    Experience the thrill of urban motorcycle riding with our comprehensive street ride event. 
+                    Discover safety tips, urban riding techniques, and connect with a vibrant community of 
+                    motorcycle enthusiasts passionate about city exploration.
+                </p>
+                <div class="flex space-x-4">
+                    <button class="px-6 py-2 bg-royal-sapphire text-white rounded-full hover:bg-deep-navy transition-colors">
+                        Join Ride
+                    </button>
+                    <button class="px-6 py-2 border-2 border-royal-sapphire text-royal-sapphire rounded-full hover:bg-royal-sapphire hover:text-white transition-colors">
+                        Community Info
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="bg-black text-white py-10">
+    <div class="container mx-auto px-4">
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+       <img alt="D&R CARGO logo" class="mb-4" height="50" src="1.jpg" width="100"/>
+       <h2 class="font-bold mb-2">
+        Alamat
+       </h2>
+       <p>
+        Jl. A. Yani No.200, Dusun II, Pabelan, Kec. Kartasura 
+        <br/>
+        Kabupaten Sukoharjo, Jawa Tengah 57161.
+       </p>
+       <div class="mt-4">
+        <p class="font-bold">
+         Customer Service Hotline
+        </p>
+        <p class="text-2xl font-bold">
+         11223344
+        </p>
+       </div>
+      </div>
+      <div>
+       <h2 class="font-bold mb-2">
+        Tentang TECH RIDER 
+       </h2>
+       <ul>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+          Profil Perusahaan
+         </a>
+        </li>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+          FAQ
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h2 class="font-bold mb-2">
+        Quick Link
+       </h2>
+       <ul>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="index.html">
+          Home
+         </a>
+        </li>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="product(2).html">
+          Product
+         </a>
+        </li>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="about us.html">
+          About
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h2 class="font-bold mb-2">
+        Media Sosial
+       </h2>
+       <div class="flex space-x-4 mb-4">
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-facebook-f">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-twitter">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-instagram">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-youtube">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-linkedin-in">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-tiktok">
+         </i>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </footer>
+
+
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+    
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+    
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+    
+        function showSlides(n) {
+          let slides = document.getElementsByClassName("mySlides");
+          let dots = document.getElementsByClassName("dot");
+          
+          if (n > slides.length) { slideIndex = 1 }
+          if (n < 1) { slideIndex = slides.length }
+          
+          for (let i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          
+          for (let i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+          }
+          
+          slides[slideIndex - 1].style.display = "block";
+          dots[slideIndex - 1].className += " active";
+        }
+    
+        function openTestRideModal() {
+          document.getElementById('testRideModal').classList.remove('hidden');
+          document.getElementById('testRideModal').classList.add('flex');
+        }
+    
+        function closeTestRideModal() {
+          document.getElementById('testRideModal').classList.remove('flex');
+          document.getElementById('testRideModal').classList.add('hidden');
+        }
+    
+        document.getElementById('testRideForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          // Add form submission logic here (e.g., send data to server)
+          alert('Test Ride request submitted!');
+          closeTestRideModal();
+        });
+      </script>
+    <script>
+        // Expanded Vehicle Data with 8 Matic, 5 Sport, and 9 Three-Wheelers
+        const lvcVehicles = [
+            // Matic Vehicles (8)
+            {
+                id: 1,
+                name: "CALLISTO 125 PREMIUM",
+                category: "matic",
+                price: "22.600.00",
+                specs: "125cc, 8.5 HP, Fuel Efficiency: 2.5L/100km",
+                image: "CALLISTO 125 PREMIUM.webp"
+            },
+            {
+                id: 2,
+                name: "CALLISTO 125 BASIC",
+                category: "matic",
+                price: "22,000,000",
+                specs: "150cc, 10 HP, Smart Connect Feature",
+                image: "CALLISTO 125 BASIC.webp"
+            },
+            {
+                id: 3,
+                name: "CALLISTO 110 LIMITED",
+                category: "matic",
+                price: "22,500,000",
+                specs: "175cc, 12 HP, Advanced ABS",
+                image: "CALLISTO 110 LIMITED.webp"
+            },
+            {
+                id: 4,
+                name: "CALLISTO 110 STD",
+                category: "matic",
+                price: "20,700,000",
+                specs: "125cc, 8 HP, Large Storage Compartment",
+                image: "CALLISTO 110 STD.webp"
+            },
+            {
+                id: 5,
+                name: "CALLISTO 110 INTELLIGO",
+                category: "matic",
+                price: "19,900,000",
+                specs: "200cc, 15 HP, GPS Navigation",
+                image: "CALLISTO 110 INTELLIGO.webp"
+            },
+            {
+                id: 6,
+                name: "DAZZ",
+                category: "matic",
+                price: "15,000,000",
+                specs: "110cc, 7 HP, Eco-Friendly Engine",
+                image: "DAZZ.webp"
+            },
+            {
+                id: 7,
+                name: "NTORQ 125 RACE XP",
+                category: "matic",
+                price: "22,000,000",
+                specs: "180cc, 13 HP, Matte Black Edition",
+                image: "NTORQ 125 RACE XP.webp"
+            },
+            {
+                id: 8,
+                name: "NTORQ 125",
+                category: "matic",
+                price: "22,000,000",
+                specs: "135cc, 9 HP, Lightweight Design",
+                image: "NTORQ 125.webp"
+            },
+
+            // Sport Vehicles (5)
+            {
+                id: 9,
+                name: "RONIN NIMBUS-SPORT",
+                category: "sport",
+                price: "41,000,000",
+                specs: "250cc, 22 HP, Racing Suspension",
+                image: "RONIN NIMBUS-SPORT.webp"
+            },
+            {
+                id: 10,
+                name: "RONIN SS-SPORT",
+                category: "sport",
+                price: "35,000,000",
+                specs: "300cc, 28 HP, Carbon Fiber Body",
+                image: "RONIN SS-SPORT.webp"
+            },
+            {
+                id: 11,
+                name: "RONIN TD-SPORT",
+                category: "sport",
+                price: "40,000,000",
+                specs: "220cc, 20 HP, Quick Shift Transmission",
+                image: "RONIN TD-SPORT.webp"
+            },
+            {
+                id: 12,
+                name: "TVS MAX 125 TRAIL-SPOR",
+                category: "sport",
+                price: "16,000,000",
+                specs: "280cc, 25 HP, Aerodynamic Design",
+                image: "TVS MAX 125 TRAIL-SPORT.webp"
+            },
+            {
+                id: 13,
+                name: "TVS MAX 125 SPORT-SPOR",
+                category: "sport",
+                price: "16,000,000",
+                specs: "350cc, 32 HP, Advanced Traction Control",
+                image: "TVS MAX 125 SPORT-SPORT.webp"
+            },
+
+            // Three-Wheeler Vehicles (9)
+            {
+                id: 14,
+                name: "KARGO INSULATOR-THREE",
+                category: "three-wheeler",
+                price: "62,000,000",
+                specs: "200cc, Cargo Capacity: 500 kg, Stable Design",
+                image: "KARGO INSULATOR-THREE.webp"
+            },
+            {
+                id: 15,
+                name: "KARGO OPEN TRAY ",
+                category: "three-wheeler",
+                price: "40,000,000",
+                specs: "175cc, Cargo Capacity: 450 kg, Versatile Use",
+                image: "KARGO OPEN TRAY E.webp"
+            },
+            {
+                id: 16,
+                name: "KARGO OPEN TRAY ECO",
+                category: "three-wheeler",
+                price: "35,000,000",
+                specs: "250cc, Cargo Capacity: 600 kg, Robust Engine",
+                image: "KARGO OPEN TRAY ECO.webp"
+            },
+            {
+                id: 17,
+                name: "KARGO OPEN TRAY",
+                category: "three-wheeler",
+                price: "40,000,000",
+                specs: "150cc, Cargo Capacity: 400 kg, Compact Design",
+                image: "KARGO OPEN TRAY.webp"
+            },
+            {
+                id: 18,
+                name: "KARGO RAM-THREE",
+                category: "three-wheeler",
+                price: "34,400,000",
+                specs: "125cc, Cargo Capacity: 350 kg, Fuel Efficient",
+                image: "KARGO RAM-THREE.webp"
+            },
+            {
+                id: 19,
+                name: "KARGO SAMPAH-THREE",
+                category: "three-wheeler",
+                price: "30,000,000",
+                specs: "300cc, Cargo Capacity: 700 kg, Heavy Industry",
+                image: "KARGO SAMPAH-THREE.webp"
+            },
+            {
+                id: 20,
+                name: "KING KARGO MOKO-THREE",
+                category: "three-wheeler",
+                price: "56,600,000",
+                specs: "180cc, Cargo Capacity: 480 kg, Maneuverability",
+                image: "KING KARGO MOKO-THREE.webp"
+            },
+            {
+                id: 21,
+                name: "KING PASSENGER-THREE",
+                category: "three-wheeler",
+                price: "58,500,000",
+                specs: "160cc, Cargo Capacity: 420 kg, Last Mile Solution",
+                image: "KING PASSENGER-THREE.webp"
+            },
+            {
+                id: 22,
+                name: "TVS CARGO BOX-THREE",
+                category: "three-wheeler",
+                price: "42,900,000",
+                specs: "220cc, Cargo Capacity: 550 kg, Smart Features",
+                image: "TVS CARGO BOX-THREE.webp"
+            }
+        ];
+
+        // The rest of the JavaScript functions remain the same as in the previous artifact
+
+        function lvcRenderVehicles(filteredVehicles) {
+            const gridContainer = document.getElementById('lvcVehicleGrid');
+            gridContainer.innerHTML = '';
+
+            filteredVehicles.forEach(vehicle => {
+                const vehicleCard = document.createElement('div');
+                vehicleCard.className = `lvc-vehicle-card bg-white rounded-3xl overflow-hidden lvc-entrance-animation`;
+                vehicleCard.dataset.category = vehicle.category;
+
+                vehicleCard.innerHTML = `
+                    <div class="lvc-electric-blue p-6">
+                        <img src="${vehicle.image}" 
+                             alt="${vehicle.name}" 
+                             class="w-full h-72 object-cover rounded-2xl">
+                    </div>
+                    <div class="lvc-carbon-gray p-6 text-white">
+                        <h3 class="text-2xl font-bold text-center tracking-wider">${vehicle.name}</h3<p class="text-center text-xl font-semibold mt-3 text-blue-300">${vehicle.price}</p>
+                    </div>
+                    <div class="p-6 text-center lvc-frost-white">
+                        <p class="text-blue-700 font-bold text-lg">
+                            <i class="fas fa-motorcycle mr-3"></i>${vehicle.specs}
+                        </p>
+                        <button onclick="lvcShowVehicleDetails(${vehicle.id})" 
+                                class="mt-6 px-10 py-4 rounded-full bg-blue-600 text-white hover:bg-blue-800 transition-all text-lg font-semibold">
+                            EXPLORE DETAILS
+                        </button>
+                    </div>
+                `;
+
+                gridContainer.appendChild(vehicleCard);
+            });
+        }
+
+        // Filter Vehicles
+        function lvcFilterVehicles(category) {
+            const buttons = document.querySelectorAll('.lvc-category-btn');
+            buttons.forEach(btn => btn.classList.remove('lvc-category-active'));
+            event.target.classList.add('lvc-category-active');
+
+            const filteredVehicles = category === 'all' 
+                ? lvcVehicles 
+                : lvcVehicles.filter(vehicle => vehicle.category === category);
+
+            lvcRenderVehicles(filteredVehicles);
+        }
+
+        // Show Vehicle Details
+        function lvcShowVehicleDetails(vehicleId) {
+            const vehicle = lvcVehicles.find(v => v.id === vehicleId);
+            const modal = document.getElementById('lvcVehicleModal');
+            
+            document.getElementById('lvcModalTitle').textContent = vehicle.name;
+            document.getElementById('lvcModalImage').src = vehicle.image;
+            document.getElementById('lvcModalPrice').textContent = vehicle.price;
+            document.getElementById('lvcModalSpecs').textContent = vehicle.specs;
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        // Close Modal
+        function lvcCloseModal() {
+            const modal = document.getElementById('lvcVehicleModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Contact Dealer
+        function lvcContactDealer() {
+            alert('An Elite Dealer will contact you shortly! Our team is dedicated to providing you with the best vehicle experience.');
+            lvcCloseModal();
+        }
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            lvcRenderVehicles(lvcVehicles);
+        });
+    </script>
+    <script>
+        function showMap() {
+            Swal.fire({
+                title: 'Dealer Location',
+                html: '<iframe src="https://g.co/kgs/rGLWff9" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen="" loading="lazy"></iframe>',
+                showCloseButton: true,
+                showConfirmButton: false,
+                width: '80%'
+            });
+        }
+
+        function contactDealer() {
+            Swal.fire({
+                title: 'Contact Dealer',
+                html: `
+                    <input type="text" placeholder="Your Name" class="swal2-input">
+                    <input type="email" placeholder="Your Email" class="swal2-input">
+                    <textarea placeholder="Your Message" class="swal2-textarea"></textarea>
+                `,
+                confirmButtonText: 'Send Message',
+                focusConfirm: false,
+                preConfirm: () => {
+                    const name = Swal.getPopup().querySelector('input').value;
+                    const email = Swal.getPopup().querySelector('input[type="email"]').value;
+                    const message = Swal.getPopup().querySelector('textarea').value;
+                    
+                    if (!name || !email || !message) {
+                        Swal.showValidationMessage('Please fill all fields');
+                    }
+                    return { name, email, message };
+                }
+            }).then((result) => {
+                if (result.value) {
+                    Swal.fire('Message Sent!', 'We will contact you soon.', 'success');
+                }
+            });
+        }
+    </script>
+     <script>
+        // Modal Functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const modalTriggers = document.querySelectorAll('.modal-trigger');
+            const modalCloses = document.querySelectorAll('.modal-close');
+
+            // Open Modal
+            modalTriggers.forEach(trigger => {
+                trigger.addEventListener('click', () => {
+                    const modalId = trigger.closest('[data-modal-id]').dataset.modalId;
+                    const modal = document.getElementById(modalId);
+                    
+                    if (modal) {
+                        modal.classList.remove('hidden');
+                        modal.classList.add('flex');
+                        
+                        // Prevent body scroll
+                        document.body.style.overflow = 'hidden';
+                    }
+                });
+            });
+
+            // Close Modal
+            modalCloses.forEach(close => {
+                close.addEventListener('click', () => {
+                    const modal = close.closest('.modal-overlay');
+                    
+                    if (modal) {
+                        modal.classList.remove('flex');
+                        modal.classList.add('hidden');
+                        
+                        // Restore body scroll
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+
+            // Close modal when clicking outside
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('flex');
+                        modal.classList.add('hidden');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+        });
+
+        // Additional Button Interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                // Subtle animation feedback
+                this.classList.add('transform', 'scale-95');
+                setTimeout(() => {
+                    this.classList.remove('transform', 'scale-95');
+                }, 100);
+
+                // Optional: Log interactions (can be replaced with actual functionality)
+                console.log(`Button clicked: ${this.textContent}`);
+            });
+        });
+    </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</body>
+</html>

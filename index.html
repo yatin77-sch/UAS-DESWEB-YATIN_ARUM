@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TECH RIDER Indonesia - Motorcycle Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+  <style>
+    .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .mySlides {
+      display: none;
+      position: relative;
+      width: 100%;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+
+    .navbar-item {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      transition-property: background-color, color;
+      transition-duration: 300ms;
+    }
+
+    .navbar-item:hover {
+      background-color: #203764;
+      color: white;
+    }
+
+    .information {
+      margin-left: 7%;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .test-ride-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    /* Base Styles */
+    .dealer-terdekat {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #93c5fd 0%, #ffffff 100%);
+        }
+
+        .container-dealer-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        .header-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            text-align: center;
+            color: #1e3a8a;
+            margin-bottom: 2rem;
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        /* Search Section */
+        .search-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 2px solid #93c5fd;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 10px rgba(30, 58, 138, 0.2);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+        }
+
+        .btn-detect {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Dealer List Styles */
+        .dealer-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .dealer-count {
+            color: #1e3a8a;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .dealer-list {
+            max-height: 600px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .dealer-card {
+            border-bottom: 1px solid #e5e7eb;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .dealer-card:hover {
+            transform: scale(1.02);
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+
+        .dealer-info {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .dealer-name {
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 0.5rem;
+        }
+
+        .dealer-address {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .dealer-phone {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        /* Map Container */
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive Layout */
+        .layout-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+        }
+
+        @media (max-width: 1024px) {
+            .layout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        .prestasi, .prestasi::before, .prestasi::after {
+            margin: 0;
+            padding-bottom: 10%;
+            box-sizing: border-box;
+        }
+
+        /* Global Styles */
+        .prestasi {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(
+                135deg,
+                #1e40af 0%,
+                #3b82f6 50%,
+                #60a5fa 100%
+            );
+            min-height: 100vh;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Layout Container */
+        .container-prestasi {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            margin-bottom: 5rem;
+            animation: fadeInDown 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .header__icon-wrapper {
+            display: inline-block;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-bottom: 2rem;
+        }
+
+        .header__icon {
+            font-size: 4rem;
+            color: #ffffff;
+            animation: rotateIcon 20s linear infinite;
+        }
+
+        .header__title {
+            color: #ffffff;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header__subtitle {
+            color: #ffffff;
+            font-size: 1.25rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Awards Grid */
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            perspective: 1000px;
+        }
+
+        /* Award Card */
+        .award-card {
+            position: relative;
+            height: 450px;
+            max-width: 300px;
+            animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            opacity: 0;
+        }
+
+        .award-card:nth-child(1) { animation-delay: 0.3s; }
+        .award-card:nth-child(2) { animation-delay: 0.6s; }
+        .award-card:nth-child(3) { animation-delay: 0.9s; }
+
+        .award-card__inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .award-card.is-flipped .award-card__inner {
+            transform: rotateY(180deg);
+        }
+
+        .award-card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .award-card__face--front {
+            background: #ffffff;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+            transform: translateZ(1px);
+        }
+
+        .award-card__face--back {
+            background: linear-gradient(
+                135deg,
+                #1e40af,
+                #3b82f6
+            );
+            color: #ffffff;
+            transform: rotateY(180deg);
+        }
+
+        .award-card__icon {
+            font-size: 3.5rem;
+            color: #1e40af;
+            margin-bottom: 2rem;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .award-card:hover .award-card__icon {
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        .award-card__title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+
+        .award-card__text {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .award-card__button {
+            background: #1e40af;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .award-card__button:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .award-card__back-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotateIcon {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container-prestasi {
+                padding: 2rem 1rem;
+            }
+
+            .header__title {
+                font-size: 2.5rem;
+            }
+
+            .awards-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .award-card {
+                height: 350px;
+            }
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: linear-gradient(to right, #1e40af, #93c5fd);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #2563eb, #60a5fa);
+            border-radius: 10px;
+        }
+
+        /* Custom Animations */
+        @keyframes skewAnimation {
+            0% { transform: skew(0deg); }
+            50% { transform: skew(-10deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        @keyframes flipAnimation {
+            0% { transform: perspective(400px) rotateY(0deg); }
+            50% { transform: perspective(400px) rotateY(180deg); }
+            100% { transform: perspective(400px) rotateY(360deg); }
+        }
+
+        @keyframes scaleAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Elegant Gradient Background */
+        .news-section {
+            background: linear-gradient(135deg, #e6f2ff, #bae6fd, #93c5fd);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        /* Card Hover Effects */
+        .news-card {
+            transition: all 0.3s ease-in-out;
+            transform-origin: center;
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Button Styles */
+        .tab-button {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover::before {
+            left: 100%;
+        }
+
+        /* Animated Backgrounds */
+        .animated-bg {
+            background: linear-gradient(-45deg, #3b82f6, #1e40af, #2563eb, #60a5fa);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        /* Comprehensive Responsive Media Queries */
+
+@media screen and (max-width: 1024px) {
+    /* General Layout Adjustments */
+    .container {
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    /* Header Responsive */
+    .bg-blue-900 .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navbar-item {
+        margin: 5px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Slideshow Responsive */
+    .slideshow-container {
+        position: relative;
+    }
+
+    .mySlides {
+        height: auto;
+        min-height: 50vh;
+    }
+
+    .mySlides .absolute {
+        position: relative;
+        padding: 20px;
+        text-align: center;
+        align-items: center;
+    }
+
+    .mySlides h1 {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .mySlides h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .mySlides .mt-4 {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mySlides .mt-4 .bg-red-600,
+    .mySlides .mt-4 .bg-blue-600 {
+        margin: 10px 0;
+        width: 100%;
+        max-width: 250px;
+    }
+
+    /* Dealer Terdekat Responsive */
+    .dealer-terdekat .layout-container {
+        flex-direction: column;
+    }
+
+    .dealer-container {
+        width: 100%;
+    }
+
+    .search-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .map-container {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    /* Awards Section Responsive */
+    .awards-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .award-card {
+        max-width: 100%;
+    }
+
+    /* News Section Responsive */
+    .news-section .tab-button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    #newsGrid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .news-card {
+        margin-bottom: 15px;
+    }
+
+    /* Footer Responsive */
+    footer .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Test Ride Modal Responsive */
+    #testRideModal .bg-white {
+        width: 95%;
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    /* More Compact Mobile View */
+    .awards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    #newsGrid {
+        grid-template-columns: 1fr;
+    }
+
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Typography Adjustments */
+    .text-4xl {
+        font-size: 2rem;
+    }
+
+    .text-2xl {
+        font-size: 1.5rem;
+    }
+
+    .text-lg {
+        font-size: 1.125rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    /* Ultra Mobile View */
+    body {
+        font-size: 14px;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    .mySlides h1 {
+        font-size: 1.5rem;
+    }
+
+    .mySlides h2 {
+        font-size: 1.25rem;
+    }
+
+    .text-4xl {
+        font-size: 1.75rem;
+    }
+
+    .text-2xl {
+        font-size: 1.25rem;
+    }
+
+    /* Compact Elements */
+    .prev, .next {
+        font-size: 16px;
+        padding: 10px;
+    }
+
+    .dot {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+/* Print Media Query for Better Print Experience */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    .printable, .printable * {
+        visibility: visible;
+    }
+    
+    .printable {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+  </style>
+</head>
+<body class="font-sans">
+  <!-- Header -->
+  <header class="bg-blue-900 text-white">
+    <div class="container mx-auto flex justify-between items-center py-4 px-8">
+      <div class="flex items-center">
+        <img src="1.jpg" alt="TVS logo" class="h-16 mr-2" />
+        <span class="text-sm">TECH RIDER SOLO</span>
+      </div>
+      <nav class="flex items-center space-x-4">
+        <a href="index.html" class="navbar-item">HOME</a>
+        <a href="product(2).html" class="navbar-item">PRODUCTS</a>
+        <a href="about us.html" class="navbar-item">ABOUT</a>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <a href="tel:08001900700" class="text-sm">BEBAS-PULSA - 0800 1 900 700</a>
+        <a href="#" class="text-sm" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="#" class="text-sm" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="relative">
+    <div class="slideshow-container">
+      <!-- Slide 1: TVS Callisto 125 -->
+      <div class="mySlides">
+        <img src="Banner web1.jpg" alt="TVS CALLISTO 125" class="w-full object-cover" />
+        <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+          <h1 class="text-4xl font-bold">TVS CALLISTO 125</h1>
+          <h2 class="text-2xl font-semibold">UPLIFT YOUR JOURNEY</h2>
+          <div class="mt-4 flex space-x-4">
+            <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+            <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-callisto-125-premium" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: TVS NTORQ 125 Race XP -->
+      <div class="mySlides">
+        <img src="web banner2.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+        <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+          <h1 class="text-4xl font-bold">TVS NTORQ 125 RACE XP</h1>
+          <h2 class="text-2xl font-semibold">PLAY SMART</h2>
+          <div class="mt-4 flex space-x-4">
+            <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+            <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-ntorq-125-xp" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Additional Slides with similar structure -->
+      <!-- Slide 3, 4, 5 would be similar to the above -->
+      <div class="mySlides">
+        <img src="Web-Banner-Aksesoris-PC.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+        <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+          <h1 class="text-4xl font-bold">TVS CALLISTO</h1>
+          <h2 class="text-2xl font-semibold">ACCESSORIES COLLECTION</h2>
+          <div class="mt-4 flex space-x-4">
+            <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+            <a href="https://indonesia.tvsmotor.com/id/our-products" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+          </div>
+        </div>
+      </div>
+      <div class="mySlides">
+        <img src="TVS RONIN.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+        <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+          <h1 class="text-4xl font-bold">TVS RONIN</h1>
+          <h2 class="text-2xl font-semibold">#UNSCRIPTED LIFE</h2>
+          <div class="mt-4 flex space-x-4">
+            <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+            <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-ronin-nimbus" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+          </div>
+        </div>
+      </div>
+      <div class="mySlides">
+        <img src="TVS KING CARGO.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+        <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+          <h1 class="text-4xl font-bold">TVS KING KARGO</h1>
+          <h2 class="text-2xl font-semibold">SATU KARGO BANYAK KEGUNAAAN</h2>
+          <div class="mt-4 flex space-x-4">
+            <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+            <a href="https://indonesia.tvsmotor.com/id/our-products" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <!-- Dot Navigation -->
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+      <span class="dot" onclick="currentSlide(5)"></span>
+    </div>
+  </main>
+
+  <!-- Test Ride Modal -->
+  <div id="testRideModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+    <div class="bg-white p-8 rounded-lg w-full max-w-md mx-4">
+      <h2 class="text-2xl font-bold mb-4">Test Ride Booking</h2>
+      <form id="testRideForm" class="space-y-4">
+        <div>
+          <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
+          <input type="text" id="nama" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Ketik Nama Anda" />
+        </div>
+        <div>
+          <label for="nomor-hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+          <input type="tel" id="nomor-hp" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan Nomor HP Anda" />
+        </div>
+        <div>
+          <label for="kota" class="block text-sm font-medium text-gray-700">Kota</label>
+          <input type="text" id="kota" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Pilih Kota Anda" />
+        </div>
+        <div>
+          <label for="dealer" class="block text-sm font-medium text-gray-700">Dealer</label>
+          <input type="text" id="dealer" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Pilih Dealer Anda" />
+        </div>
+        <div>
+          <label for="pilih-motor" class="block text-sm font-medium text-gray-700">Pilih Motor</label>
+          <select id="pilih-motor" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+            <option value="">Pilih Motor</option>
+            <option>TVS Callisto 125</option>
+            <option>TVS NTORQ 125 Race XP</option>
+          </select>
+        </div>
+        <div>
+          <label for="pesan" class="block text-sm font-medium text-gray-700">Pesan</label>
+          <textarea id="pesan" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan Pesan Anda"></textarea>
+        </div>
+        <div class="flex justify-end space-x-2">
+          <button type="button" onclick="closeTestRideModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded">Batal</button>
+          <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded">Kirim</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <section class="dealer-terdekat">
+    <div class="container-dealer-section">
+        <h1 class="header-title">Dealer Terdekat</h1>
+        <div class="layout-container">
+            <div class="dealer-container">
+                <div class="search-container">
+                    <input class="search-input" id="searchInput" placeholder="Cari Kota / Dealer" type="text"/>
+                    <button class="btn" id="orButton">ATAU</button>
+                    <button class="btn btn-detect" id="detectButton">
+                        <i class="fas fa-cog"></i>
+                        DETEKSI
+                    </button>
+                </div>
+                <p class="dealer-count">Menampilkan <strong>39 TVS dealer</strong> di Indonesia</p>
+                <div class="dealer-list" id="dealerList">
+                    <!-- Dealer cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+            <div class="map-container">
+                <img alt="Map showing TVS dealers in Indonesia" src="map.png"/>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="prestasi">
+  <div class="container-prestasi">
+      <!-- Header Section -->
+      <div class="header">
+          <div class="header__icon-wrapper">
+              <i class="fas fa-trophy header__icon"></i>
+          </div>
+          <h1 class="header__title">Awards & Achievements</h1>
+          <p class="header__subtitle">Celebrating Excellence in Innovation, Quality, and Customer Satisfaction</p>
+      </div>
+
+      <!-- Awards Grid -->
+      <div class="awards-grid">
+          <!-- Award Card 1 -->
+          <div class="award-card">
+              <div class="award-card__inner">
+                  <div class="award-card__face award-card__face--front">
+                      <i class="fas fa-award award-card__icon"></i>
+                      <h2 class="award-card__title">Sport Retro Award</h2>
+                      <p class="award-card__text">
+                          TVS RONIN meraih penghargaan untuk kategori SPORT RETRO diajang penghargaan bergensi dari Otomotif Award 2024.
+                      </p>
+                      <button class="award-card__button">Learn More</button>
+                  </div>
+                  <div class="award-card__face award-card__face--back">
+                      <p class="award-card__back-text">
+                          Penghargaan ini diberikan berdasarkan penilaian independen yang ketat oleh otomotif grup, mencerminkan inovasi dan kualitas desain TVS RONIN.
+                      </p>
+                      <button class="award-card__button">Back</button>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Award Card 2 -->
+          <div class="award-card">
+              <div class="award-card__inner">
+                  <div class="award-card__face award-card__face--front">
+                      <i class="fas fa-medal award-card__icon"></i>
+                      <h2 class="award-card__title">TQM Excellence</h2>
+                      <p class="award-card__text">
+                          TVS Motor Company adalah satu-satunya perusahaan roda dua di dunia yang mendapatkan penghargaan TQM bergengsi.
+                      </p>
+                      <button class="award-card__button">Learn More</button>
+                  </div>
+                  <div class="award-card__face award-card__face--back">
+                      <p class="award-card__back-text">
+                          Penghargaan TQM mencerminkan komitmen kami terhadap standar kualitas tertinggi dalam industri otomotif global.
+                      </p>
+                      <button class="award-card__button">Back</button>
+                  </div>
+              </div>
+          </div>
+
+          <!-- Award Card 3 -->
+          <div class="award-card">
+              <div class="award-card__inner">
+                  <div class="award-card__face award-card__face--front">
+                      <i class="fas fa-trophy award-card__icon"></i>
+                      <h2 class="award-card__title">Customer Satisfaction</h2>
+                      <p class="award-card__text">
+                          TVS Motor menduduki peringkat Perusahaan No.1 dalam Survei Kepuasan Layanan Pelanggan J.D Power selama empat tahun berturut-turut.
+                      </p>
+                      <button class="award-card__button">Learn More</button>
+                  </div>
+                  <div class="award-card__face award-card__face--back">
+                      <p class="award-card__back-text">
+                          Pencapaian berturut-turut ini membuktikan dedikasi kami dalam memberikan layanan terbaik kepada pelanggan.
+                      </p>
+                      <button class="award-card__button">Back</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
+<section class="news-section bg-opacity-90">
+  <div class="container mx-auto py-8 px-4">
+      <h2 class="text-4xl font-extrabold text-center text-blue-900 mb-8 animate-pulse">
+          Latest From <span class="text-blue-600">TVS</span>
+      </h2>
+
+      <!-- Tab Navigation with Advanced Interactions -->
+      <div class="flex justify-center mb-8">
+          <button id="newsTab" class="tab-button px-6 py-3 bg-blue-700 text-white font-semibold rounded-tl-lg rounded-bl-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+              <i class="fas fa-newspaper mr-2"></i>NEWS
+          </button>
+          <button id="blogsTab" class="tab-button px-6 py-3 bg-gray-200 text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+              <i class="fas fa-blog mr-2"></i>BLOGS
+          </button>
+          <button id="reviewsTab" class="tab-button px-6 py-3 bg-gray-200 text-gray-700 rounded-tr-lg rounded-br-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300">
+              <i class="fas fa-star-half-alt mr-2"></i>REVIEWS
+          </button>
+      </div>
+
+      <!-- News Grid with Advanced Animations -->
+      <div id="newsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- News Card 1 -->
+          <div class="news-card bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:skew-y-2 hover:scale-105">
+              <div class="relative overflow-hidden">
+                  <img src="https://storage.googleapis.com/a1aa/image/JDUAz7IW7maTLJaBv15YQIn8oLUKIGaU9f3OVsLfiTEKIG6TA.jpg" 
+                       alt="Grand Opening TVS SUOH" 
+                       class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"/>
+                  <div class="absolute inset-0 bg-blue-900 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+              </div>
+              <div class="p-5">
+                  <h3 class="text-lg font-bold text-blue-900 mb-2">
+                      Grand Opening TVS SOLO
+                  </h3>
+                  <p class="text-blue-600 text-sm flex items-center">
+                      <i class="fas fa-calendar-alt mr-2"></i>
+                      2 November 2024
+                  </p>
+              </div>
+          </div>
+
+          <!-- News Card 2 -->
+          <div class="news-card bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:skew-y-2 hover:scale-105">
+              <div class="relative overflow-hidden">
+                  <img src="RONIN NIMBUS-SPORT.webp" 
+                       alt="New Product Launching TVS Ronin Nimbus" 
+                       class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"/>
+                  <div class="absolute inset-0 bg-blue-900 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+              </div>
+              <div class="p-5">
+                  <h3 class="text-lg font-bold text-blue-900 mb-2">
+                      New Product Launching TVS Ronin Nimbus
+                  </h3>
+                  <p class="text-blue-600 text-sm flex items-center">
+                      <i class="fas fa-calendar-alt mr-2"></i>
+                      20 Agustus 2024
+                  </p>
+              </div>
+          </div>
+
+          <!-- News Card 3 -->
+          <div class="news-card bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:skew-y-2 hover:scale-105">
+              <div class="relative overflow-hidden">
+                  <img src="https://storage.googleapis.com/a1aa/image/2lgt1mAPkaqfPiCo1YwSmJxIq7BhMKrDJCGuAlro7FoEED9JA.jpg" 
+                       alt="Grand Opening TVS SUKABUMI" 
+                       class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"/>
+                  <div class="absolute inset-0 bg-blue-900 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+              </div>
+              <div class="p-5">
+                  <h3 class="text-lg font-bold text-blue-900 mb-2">
+                      Grand Opening TVS SUKABUMI
+                  </h3>
+                  <p class="text-blue-600 text-sm flex items-center">
+                      <i class="fas fa-calendar-alt mr-2"></i>
+                      16 Agustus 2024
+                  </p>
+              </div>
+          </div>
+
+          <!-- News Card 4 -->
+          <div class="news-card bg-white rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 hover:skew-y-2 hover:scale-105">
+              <div class="relative overflow-hidden">
+                  <img src="https://storage.googleapis.com/a1aa/image/7vrgw4p6pDpFPpNeKa13gb61xiblM1eblDrKvICL5qXHIG6TA.jpg" 
+                       alt="Grand Opening TVS BANJARBARU" 
+                       class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110"/>
+                  <div class="absolute inset-0 bg-blue-900 opacity-0 hover:opacity-30 transition-opacity duration-300"></div>
+              </div>
+              <div class="p-5">
+                  <h3 class="text-lg font-bold text-blue-900 mb-2">
+                      Grand Opening TVS BANJARBARU
+                  </h3>
+                  <p class="text-blue-600 text-sm flex items-center">
+                      <i class="fas fa-calendar-alt mr-2"></i>
+                      8 Agustus 2024
+                  </p>
+              </div>
+          </div>
+      </div>
+
+      <!-- View All Button with Advanced Styling -->
+      <div class="flex justify-center mt-10">
+          <button id="viewAllBtn" class="px-8 py-3 bg-blue-700 text-white rounded-lg font-bold uppercase tracking-wider 
+                                          hover:bg-blue-600 transform hover:scale-105 transition-all duration-300 
+                                          focus:outline-none focus:ring-4 focus:ring-blue-300 
+                                          animated-bg text-shadow">
+              <i class="fas fa-eye mr-2"></i>View All
+          </button>
+      </div>
+  </div>
+</section>
+<footer class="bg-black text-white py-10">
+    <div class="container mx-auto px-4">
+     <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+       <img alt="D&R CARGO logo" class="mb-4" height="50" src="1.jpg" width="100"/>
+       <h2 class="font-bold mb-2">
+        Alamat
+       </h2>
+       <p>
+        Jl. A. Yani No.200, Dusun II, Pabelan, Kec. Kartasura 
+        <br/>
+        Kabupaten Sukoharjo, Jawa Tengah 57161.
+       </p>
+       <div class="mt-4">
+        <p class="font-bold">
+         Customer Service Hotline
+        </p>
+        <p class="text-2xl font-bold">
+         11223344
+        </p>
+       </div>
+      </div>
+      <div>
+       <h2 class="font-bold mb-2">
+        Tentang TECH RIDER 
+       </h2>
+       <ul>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+          Profil Perusahaan
+         </a>
+        </li>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+          FAQ
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h2 class="font-bold mb-2">
+        Quick Link
+       </h2>
+       <ul>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="index.html">
+          Home
+         </a>
+        </li>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="product(2).html">
+          Product
+         </a>
+        </li>
+        <li>
+         <a class="transition-colors duration-300 hover:text-gray-400" href="about us.html">
+          About
+         </a>
+        </li>
+       </ul>
+      </div>
+      <div>
+       <h2 class="font-bold mb-2">
+        Media Sosial
+       </h2>
+       <div class="flex space-x-4 mb-4">
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-facebook-f">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-twitter">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-instagram">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-youtube">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-linkedin-in">
+         </i>
+        </a>
+        <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+         <i class="fab fa-tiktok">
+         </i>
+        </a>
+       </div>
+      </div>
+     </div>
+    </div>
+   </footer>
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+
+    function openTestRideModal() {
+      document.getElementById('testRideModal').classList.remove('hidden');
+      document.getElementById('testRideModal').classList.add('flex');
+    }
+
+    function closeTestRideModal() {
+      document.getElementById('testRideModal').classList.remove('flex');
+      document.getElementById('testRideModal').classList.add('hidden');
+    }
+
+    document.getElementById('testRideForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Add form submission logic here (e.g., send data to server)
+      alert('Test Ride request submitted!');
+      closeTestRideModal();
+    });
+  </script>
+  <script>
+    // Dealer data
+    const dealers = [
+        {
+            name: 'TVS KUDUS',
+            address: 'Jalan Raya Pati, No. 49, Kalangan, Tengeles, Mejobo District, Kudus Regency',
+            phone: '0291-2922777'
+        },
+        {
+            name: 'TVS CENGKARENG',
+            address: 'Jl.Daan Mogot Raya KM 14, No.168 J, Jakbar',
+            phone: '0812-1008-1335'
+        },
+        {
+            name: 'TVS GARUT',
+            address: 'JL. CILEDUG NO 241, KEL. KOTA KULON, KEC. GARUT KOTA, KAB. GARUT',
+            phone: '0821 1545 1465'
+        },
+        {
+            name: 'TVS MAKASSAR',
+            address: 'Jl. Sultan Alauddin No. 105, Makassar',
+            phone: '0411-1234567'
+        }
+    ];
+
+    // Function to create dealer card
+    function createDealerCard(dealer) {
+        return `
+            <div class="dealer-card">
+                <div class="dealer-info">
+                    <i class="fas fa-map-marker-alt" style="color: var(--primary-dark)"></i>
+                    <div>
+                        <div class="dealer-name">${dealer.name}</div>
+                        <div class="dealer-address">${dealer.address}</div>
+                    </div>
+                </div>
+                <div class="dealer-phone">
+                    <i class="fas fa-phone-alt" style="color: var(--primary-dark)"></i>
+                    <span>${dealer.phone}</span>
+                </div>
+                <button class="btn" onclick="getDirections('${dealer.address}')">
+                    <i class="fas fa-directions"></i>
+                    DAPATKAN PETUNJUK
+                </button>
+            </div>
+        `;
+    }
+
+    // Initialize dealer list
+    function initializeDealerList() {
+        const dealerList = document.getElementById('dealerList');
+        dealers.forEach(dealer => {
+            dealerList.innerHTML += createDealerCard(dealer);
+        });
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredDealers = dealers.filter(dealer =>
+            dealer.name.toLowerCase().includes(searchTerm) ||
+            dealer.address.toLowerCase().includes(searchTerm)
+        );
+        
+        const dealerList = document.getElementById('dealerList');
+        dealerList.innerHTML = '';
+        filteredDealers.forEach(dealer => {
+            dealerList.innerHTML += createDealerCard(dealer);
+        });
+    });
+
+    // Detect location
+    document.getElementById('detectButton').addEventListener('click', () => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    alert(`Location detected!\nLatitude: ${position.coords.latitude}\nLongitude: ${position.coords.longitude}`);
+                    // Here you would typically send these coordinates to your backend
+                    // and get the nearest dealers
+                },
+                () => {
+                    alert('Unable to detect location. Please enable location services.');
+                }
+            );
+        } else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    });
+
+    // Get directions
+    function getDirections(address) {
+        const encodedAddress = encodeURIComponent(address);
+        window.open(`https://www.google.com/maps/dir/?api=1&destination=${encodedAddress}`, '_blank');
+    }
+
+    // Initialize the page
+    initializeDealerList();
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      // Card Flip Functionality
+      const cards = document.querySelectorAll('.award-card');
+      
+      cards.forEach(card => {
+          const buttons = card.querySelectorAll('.award-card__button');
+          
+          buttons.forEach(button => {
+              button.addEventListener('click', () => {
+                  card.classList.toggle('is-flipped');
+              });
+          });
+
+          // Add hover animation
+          card.addEventListener('mouseenter', () => {
+              if (!card.classList.contains('is-flipped')) {
+                  card.querySelector('.award-card__inner').style.transform = 'translateY(-10px)';
+              }
+          });
+
+          card.addEventListener('mouseleave', () => {
+              if (!card.classList.contains('is-flipped')) {
+                  card.querySelector('.award-card__inner').style.transform = 'translateY(0)';
+              }
+          });
+      });
+
+      // Scroll Animation
+      function revealCards() {
+          const cards = document.querySelectorAll('.award-card');
+          const windowHeight = window.innerHeight;
+
+          cards.forEach(card => {
+              const cardTop = card.getBoundingClientRect().top;
+              if (cardTop < windowHeight * 0.85) {
+                  card.style.opacity = '1';
+                  card.style.transform = 'translateY(0)';
+              }
+          });
+      }
+
+      window.addEventListener('scroll', revealCards);
+      revealCards(); // Initial check
+
+      // Smooth Scroll for Safari
+      document.documentElement.style.scrollBehavior = 'smooth';
+  });
+</script>
+<script>
+  // Advanced Tab Functionality
+  const tabs = {
+      newsTab: document.getElementById('newsTab'),
+      blogsTab: document.getElementById('blogsTab'),
+      reviewsTab: document.getElementById('reviewsTab')
+  };
+
+  const newsGrid = document.getElementById('newsGrid');
+  const viewAllBtn = document.getElementById('viewAllBtn');
+
+  // Tab Switching Logic
+  Object.values(tabs).forEach(tab => {
+      tab.addEventListener('click', function() {
+          // Reset all tab styles
+          Object.values(tabs).forEach(t => {
+              t.classList.remove('bg-blue-700', 'text-white');
+              t.classList.add('bg-gray-200', 'text-gray-700');
+          });
+
+          // Apply active tab style
+          this.classList.remove('bg-gray-200', 'text-gray-700');
+          this.classList.add('bg-blue-700', 'text-white');
+
+          // Simulated content switch (you can expand this)
+          switch(this.id) {
+              case 'newsTab':
+                  newsGrid.classList.add('animate-pulse');
+                  setTimeout(() => newsGrid.classList.remove('animate-pulse'), 1000);
+                  break;
+              case 'blogsTab':
+                  newsGrid.classList.add('animate-bounce');
+                  setTimeout(() => newsGrid.classList.remove('animate-bounce'), 1000);
+                  break;
+              case 'reviewsTab':
+                  newsGrid.classList.add('animate-pulse');
+                  setTimeout(() => newsGrid.classList.remove('animate-pulse'), 1000);
+                  break;
+          }
+      });
+  });
+
+  // View All Button Interaction
+  viewAllBtn.addEventListener('click', function() {
+      this.classList.add('animate-ping');
+      setTimeout(() => {
+          this.classList.remove('animate-ping');
+          alert('Redirecting to full news section...');
+      }, 1000);
+  });
+
+  // Card Hover Animations
+  const newsCards = document.querySelectorAll('.news-card');
+  newsCards.forEach(card => {
+      card.addEventListener('mouseenter', function() {
+          this.style.animation = 'scaleAnimation 0.5s ease-in-out';
+      });
+      card.addEventListener('mouseleave', function() {
+          this.style.animation = '';
+      });
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECH RIDER Indonesia - Motorcycle Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <style>
+        .slideshow-container {
+      position: relative;
+      max-width: 100%;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    .mySlides {
+      display: none;
+      position: relative;
+      width: 100%;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 10;
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+
+    .dot {
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin: 0 2px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.6s ease;
+    }
+
+    .active, .dot:hover {
+      background-color: #717171;
+    }
+
+    .navbar-item {
+      padding: 0.5rem 1rem;
+      border-radius: 0.375rem;
+      transition-property: background-color, color;
+      transition-duration: 300ms;
+    }
+
+    .navbar-item:hover {
+      background-color: #203764;
+      color: white;
+    }
+
+    .information {
+      margin-left: 7%;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .test-ride-form {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+        :root {
+            --primary-blue-dark: #1A365D;
+            --primary-blue-light: #4299E1;
+            --secondary-blue: #2C5282;
+        }
+
+        .visi-misi {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, var(--primary-blue-dark) 0%, var(--primary-blue-light) 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .skew-animation {
+            transition: all 0.5s ease;
+        }
+
+        .skew-animation:hover {
+            transform: skew(-5deg, 0);
+        }
+
+        .flip-animation {
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-animation:hover {
+            transform: rotateY(180deg);
+        }
+
+        .scale-animation {
+            transition: all 0.4s ease;
+        }
+
+        .scale-animation:hover {
+            transform: scale(1.05);
+        }
+
+        .glass-morphism {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        .tvs-solo-opening {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #ffffff;
+        }
+
+        .tvs-solo-hero-section {
+            perspective: 1000px;
+        }
+
+        .tvs-solo-card {
+            transition: all 0.6s cubic-bezier(0.25, 0.1, 0.25, 1);
+            transform-style: preserve-3d;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .tvs-solo-card:hover {
+            transform: scale(1.05) rotateY(15deg);
+        }
+
+        .tvs-solo-btn-custom {
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tvs-solo-btn-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .tvs-solo-btn-custom:hover::before {
+            left: 100%;
+        }
+
+        .tvs-solo-skew-animation {
+            transition: all 0.5s ease;
+        }
+
+        .tvs-solo-skew-animation:hover {
+            transform: skew(-10deg, 0);
+        }
+        /* Mobile Responsive Breakpoints */
+@media screen and (max-width: 768px) {
+    /* Header Responsive */
+    header .container {
+        flex-direction: column;
+        padding: 1rem 0.5rem;
+    }
+
+    header .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    header .navbar-item {
+        margin-bottom: 0.5rem;
+    }
+
+    header .flex.items-center {
+        margin-bottom: 1rem;
+    }
+
+    /* Slideshow Responsive */
+    .slideshow-container .mySlides .information {
+        padding: 1rem;
+    }
+
+    .slideshow-container .mySlides h1 {
+        font-size: 2rem;
+    }
+
+    .slideshow-container .mySlides h2 {
+        font-size: 1.5rem;
+    }
+
+    .slideshow-container .prev,
+    .slideshow-container .next {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    /* Visi Misi Section Responsive */
+    .visi-misi .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .visi-misi .grid > div {
+        margin-bottom: 1rem;
+    }
+
+    .visi-misi #logo {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .visi-misi h1 {
+        font-size: 2.5rem;
+    }
+
+    .visi-misi h2 {
+        font-size: 1.5rem;
+    }
+
+    /* TVS Solo Section Responsive */
+    .tvs-solo-opening .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tvs-solo-title {
+        font-size: 2.5rem;
+        text-align: center;
+    }
+
+    .tvs-solo-action-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tvs-solo-action-buttons button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Footer Responsive */
+    footer .grid {
+        grid-template-columns: 1fr;
+    }
+
+    footer .grid > div {
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    footer .media-sosial {
+        justify-content: center;
+    }
+
+    /* Test Ride Modal */
+    .test-ride-form {
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 1rem;
+    }
+
+    /* Buttons and Form Elements */
+    button, input, select, textarea {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 480px) {
+    .visi-misi h1 {
+        font-size: 2rem;
+    }
+
+    .tvs-solo-title {
+        font-size: 2rem;
+    }
+
+    .slideshow-container .mySlides h1 {
+        font-size: 1.5rem;
+    }
+
+    .slideshow-container .mySlides h2 {
+        font-size: 1.25rem;
+    }
+}
+/* Mobile Responsive Breakpoints */
+@media screen and (max-width: 768px) {
+    /* Slideshow Container Responsive */
+    .slideshow-container {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    .mySlides {
+        position: relative;
+    }
+
+    .prev, .next {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .dot {
+        height: 10px;
+        width: 10px;
+    }
+
+    /* Navbar Responsive */
+    .navbar-item {
+        display: block;
+        text-align: center;
+        margin: 0.5rem 0;
+        padding: 0.25rem;
+    }
+
+    .information {
+        margin-left: 0;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    /* Visi Misi Section Responsive */
+    .visi-misi {
+        padding: 1rem;
+    }
+
+    .skew-animation:hover {
+        transform: skew(-3deg, 0);
+    }
+
+    .flip-animation:hover {
+        transform: rotateY(120deg);
+    }
+
+    .scale-animation:hover {
+        transform: scale(1.02);
+    }
+
+    .glass-morphism {
+        backdrop-filter: blur(5px);
+    }
+
+    /* TVS Solo Opening Responsive */
+    .tvs-solo-opening {
+        padding: 1rem;
+    }
+
+    .tvs-solo-hero-section {
+        perspective: 500px;
+    }
+
+    .tvs-solo-card {
+        margin-bottom: 1rem;
+    }
+
+    .tvs-solo-card:hover {
+        transform: scale(1.02) rotateY(10deg);
+    }
+
+    .tvs-solo-btn-custom {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .tvs-solo-skew-animation:hover {
+        transform: skew(-5deg, 0);
+    }
+
+    /* Specific Responsive Adjustments */
+    #logo {
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    /* Test Ride Form Responsive */
+    .test-ride-form {
+        max-width: 100%;
+        padding: 0.5rem;
+    }
+
+    /* Typography Adjustments */
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Grid and Flex Layouts */
+    .grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .flex {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Button Responsiveness */
+    button {
+        width: 100%;
+        margin: 0.5rem 0;
+    }
+
+    /* Modal Responsiveness */
+    #modalOverlay, #tvs-solo-modal {
+        padding: 1rem;
+    }
+
+    .modal-content, #tvs-solo-modal-content {
+        width: 90%;
+        max-width: 400px;
+    }
+}
+
+/* Extra Small Devices */
+@media screen and (max-width: 480px) {
+    /* More aggressive size reductions */
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    .tvs-solo-title {
+        font-size: 1.75rem;
+    }
+
+    .information h1 {
+        font-size: 1.75rem;
+    }
+
+    .information h2 {
+        font-size: 1.25rem;
+    }
+}
+    </style>
+</head>
+<body class="font-sans">
+    <!-- Header -->
+    <header class="bg-blue-900 text-white">
+      <div class="container mx-auto flex justify-between items-center py-4 px-8">
+        <div class="flex items-center">
+          <img src="1.jpg" alt="TVS logo" class="h-16 mr-2" />
+          <span class="text-sm">INDONESIA</span>
+        </div>
+        <nav class="flex items-center space-x-4">
+          <a href="index.html" class="navbar-item">HOME</a>
+          <a href="product(2).html" class="navbar-item">PRODUCTS</a>
+          <a href="about us.html" class="navbar-item">ABOUT</a>
+        </nav>
+        <div class="flex items-center space-x-4">
+          <a href="tel:08001900700" class="text-sm">BEBAS-PULSA - 0800 1 900 700</a>
+          <a href="#" class="text-sm" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-sm" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Main Content -->
+    <main class="relative">
+      <div class="slideshow-container">
+        <!-- Slide 1: TVS Callisto 125 -->
+        <div class="mySlides">
+          <img src="Banner web1.jpg" alt="TVS CALLISTO 125" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS CALLISTO 125</h1>
+            <h2 class="text-2xl font-semibold">UPLIFT YOUR JOURNEY</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-callisto-125-premium" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Slide 2: TVS NTORQ 125 Race XP -->
+        <div class="mySlides">
+          <img src="web banner2.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS NTORQ 125 RACE XP</h1>
+            <h2 class="text-2xl font-semibold">PLAY SMART</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-ntorq-125-xp" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Additional Slides with similar structure -->
+        <!-- Slide 3, 4, 5 would be similar to the above -->
+        <div class="mySlides">
+          <img src="Web-Banner-Aksesoris-PC.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS CALLISTO</h1>
+            <h2 class="text-2xl font-semibold">ACCESSORIES COLLECTION</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides">
+          <img src="TVS RONIN.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS RONIN</h1>
+            <h2 class="text-2xl font-semibold">#UNSCRIPTED LIFE</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products/tvs-ronin-nimbus" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+        <div class="mySlides">
+          <img src="TVS KING CARGO.jpg" alt="TVS NTORQ 125 Race XP" class="w-full object-cover" />
+          <div class="absolute inset-0 flex flex-col justify-center items-start p-8 text-white information">
+            <h1 class="text-4xl font-bold">TVS KING KARGO</h1>
+            <h2 class="text-2xl font-semibold">SATU KARGO BANYAK KEGUNAAAN</h2>
+            <div class="mt-4 flex space-x-4">
+              <button onclick="openTestRideModal()" class="bg-red-600 text-white px-4 py-2 rounded">TEST RIDE</button>
+              <a href="https://indonesia.tvsmotor.com/id/our-products" class="bg-blue-600 text-white px-4 py-2 rounded">DETAIL PRODUK</a>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Navigation Arrows -->
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      </div>
+  
+      <!-- Dot Navigation -->
+      <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+        <span class="dot" onclick="currentSlide(5)"></span>
+      </div>
+    </main>
+  
+    <!-- Test Ride Modal -->
+    <div id="testRideModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden items-center justify-center">
+      <div class="bg-white p-8 rounded-lg w-full max-w-md mx-4">
+        <h2 class="text-2xl font-bold mb-4">Test Ride Booking</h2>
+        <form id="testRideForm" class="space-y-4">
+          <div>
+            <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
+            <input type="text" id="nama" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Ketik Nama Anda" />
+          </div>
+          <div>
+            <label for="nomor-hp" class="block text-sm font-medium text-gray-700">Nomor HP</label>
+            <input type="tel" id="nomor-hp" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan Nomor HP Anda" />
+          </div>
+          <div>
+            <label for="kota" class="block text-sm font-medium text-gray-700">Kota</label>
+            <input type="text" id="kota" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Pilih Kota Anda" />
+          </div>
+          <div>
+            <label for="dealer" class="block text-sm font-medium text-gray-700">Dealer</label>
+            <input type="text" id="dealer" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Pilih Dealer Anda" />
+          </div>
+          <div>
+            <label for="pilih-motor" class="block text-sm font-medium text-gray-700">Pilih Motor</label>
+            <select id="pilih-motor" required class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+              <option value="">Pilih Motor</option>
+              <option>TVS Callisto 125</option>
+              <option>TVS NTORQ 125 Race XP</option>
+            </select>
+          </div>
+          <div>
+            <label for="pesan" class="block text-sm font-medium text-gray-700">Pesan</label>
+            <textarea id="pesan" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Masukkan Pesan Anda"></textarea>
+          </div>
+          <div class="flex justify-end space-x-2">
+            <button type="button" onclick="closeTestRideModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-medium py-2 px-4 rounded">Batal</button>
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded">Kirim</button>
+          </div>
+        </form>
+      </div>
+    </div>
+<section class=" visi-misi text-white">
+    <div class="container-visimisi mx-auto px-4 py-8">
+        <div class="flex flex-col items-center mb-12">
+            <img 
+                id="logo" 
+                src="1.jpg" 
+                alt="Tech Rider Logo" 
+                class="w-48 h-48 object-contain mb-4 skew-animation hover:shadow-2xl"
+            />
+            <h1 class="text-5xl font-bold text-white tracking-wide mb-2 flip-animation">
+                TECH RIDER
+            </h1>
+            <h2 class="text-2xl text-blue-200 tracking-widest scale-animation">
+                MOTORCYCLE SOLUTIONS
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <div class="bg-white/10 p-8 rounded-2xl glass-morphism scale-animation">
+                <h3 class="text-3xl font-bold text-blue-100 mb-6 border-b-2 border-blue-300 pb-3">
+                    About Us
+                </h3>
+                <div class="space-y-4 text-blue-50">
+                    <p class="leading-relaxed skew-animation hover:text-blue-100">
+                        Tech Rider adalah perusahaan distribusi motor terpercaya yang menjadi mitra resmi TVS, salah satu produsen motor terkemuka di dunia.
+                    </p>
+                    <p class="leading-relaxed scale-animation hover:text-blue-100">
+                        Kami tidak sekadar menjual produk, tetapi memberikan pengalaman pelanggan menyeluruh, termasuk layanan purna jual, suku cadang asli, dan konsultasi kebutuhan kendaraan.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-rows-2 gap-8">
+                <div class="bg-white/10 p-6 rounded-2xl glass-morphism scale-animation">
+                    <h4 class="text-2xl font-semibold text-blue-100 mb-4">Misi Kami</h4>
+                    <p class="text-blue-50">
+                        Menjadi pilihan utama masyarakat Indonesia dalam memenuhi kebutuhan kendaraan roda dua.
+                    </p>
+                </div>
+                
+                <div class="bg-white/10 p-6 rounded-2xl glass-morphism scale-animation">
+                    <h4 class="text-2xl font-semibold text-blue-100 mb-4">Komitmen</h4>
+                    <p class="text-blue-50">
+                        Mendukung perkembangan teknologi transportasi yang inovatif dan berkelanjutan.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-12 text-center">
+            <div class="flex justify-center space-x-6">
+                <button 
+                    onclick="showModal('contact')" 
+                    class="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all duration-300 scale-animation"
+                >
+                    Hubungi Kami
+                </button>
+                <button 
+                    onclick="showModal('products')" 
+                    class="px-6 py-3 border-2 border-blue-400 text-blue-300 rounded-full hover:bg-blue-500 hover:text-white transition-all duration-300 skew-animation"
+                >
+                    Produk Kami
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div 
+        id="modalOverlay" 
+        class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center"
+        onclick="closeModal()"
+    >
+        <div 
+            id="modalContent" 
+            class="bg-white/20 p-8 rounded-2xl w-96 glass-morphism transform transition-all duration-300 scale-75 opacity-0"
+            onclick="event.stopPropagation()"
+        >
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4 text-blue-100"></h2>
+            <div id="modalBody" class="text-blue-50"></div>
+            <button 
+                onclick="closeModal()" 
+                class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+            >
+                Tutup
+            </button>
+        </div>
+    </div>
+</section>
+<section class="tvs-solo-opening min-h-screen flex flex-col justify-center items-center">
+    <div class="tvs-solo-container mx-auto px-4 py-8">
+        <div class="tvs-solo-hero-section grid md:grid-cols-2 gap-8 items-center">
+            <div class="tvs-solo-card bg-white/10 backdrop-blur-lg rounded-xl p-6 tvs-solo-skew-animation">
+                <img 
+                    src="https://storage.googleapis.com/a1aa/image/FS7wwEGtQwqCFpvrUIRbYlffZTHcHiU8H9AIwB6GU7s7SK6TA.jpg" 
+                    alt="TVS Solo Grand Opening" 
+                    class="tvs-solo-image rounded-lg shadow-xl w-full h-auto transform transition-all duration-500 hover:scale-105"
+                />
+            </div>
+            
+            <div class="tvs-solo-text-section space-y-6">
+                <h1 class="tvs-solo-title text-4xl font-bold text-white mb-4 transform transition-all duration-700 hover:tracking-wider">
+                    TVS Solo Grand Opening
+                </h1>
+                
+                <div class="tvs-solo-content-text space-y-4">
+                    <p class="tvs-solo-paragraph text-white/80 leading-relaxed">
+                        Tech Rider hadir di Solo sebagai mitra strategis TVS, memfasilitasi hubungan antara masyarakat dan perusahaan otomotif terkemuka.
+                    </p>
+                    <p class="tvs-solo-paragraph text-white/80 leading-relaxed">
+                        Layanan komprehensif kami mencakup pembelian, perawatan kendaraan, dan konsultasi teknis dengan pendekatan personal.
+                    </p>
+                </div>
+                
+                <div class="tvs-solo-action-buttons space-x-4 flex">
+                    <button 
+                        onclick="tvsSoloShowDetails()"
+                        class="tvs-solo-btn-custom text-white px-6 py-3 rounded-lg shadow-lg transform hover:scale-110 active:scale-95"
+                    >
+                        Learn More
+                    </button>
+                    <button 
+                        onclick="tvsSoloContactUs()"
+                        class="tvs-solo-btn-custom text-white px-6 py-3 rounded-lg shadow-lg transform hover:scale-110 active:scale-95"
+                    >
+                        Contact Us
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div 
+        id="tvs-solo-modal" 
+        class="fixed inset-0 bg-black/70 z-50 hidden items-center justify-center"
+        onclick="tvsSoloCloseModal(event)"
+    >
+        <div class="tvs-solo-modal-content bg-white/20 backdrop-blur-lg p-8 rounded-xl max-w-md text-center transform transition-all duration-500 scale-0" id="tvs-solo-modal-content">
+            <h2 class="tvs-solo-modal-title text-2xl font-bold mb-4 text-white">TVS Solo Details</h2>
+            <p class="tvs-solo-modal-text text-white/80 mb-6">
+                Temukan layanan komprehensif TVS di Tech Rider Solo. Kami siap memberikan pengalaman terbaik dalam dunia otomotif.
+            </p>
+            <button 
+                onclick="tvsSoloCloseModal()"
+                class="tvs-solo-btn-custom text-white px-6 py-3 rounded-lg"
+            >
+                Close
+            </button>
+        </div>
+    </div>
+    <footer class="bg-black text-white py-10">
+      <div class="container mx-auto px-4">
+       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+         <img alt="D&R CARGO logo" class="mb-4" height="50" src="1.jpg" width="100"/>
+         <h2 class="font-bold mb-2">
+          Alamat
+         </h2>
+         <p>
+          Jl. A. Yani No.200, Dusun II, Pabelan, Kec. Kartasura 
+          <br/>
+          Kabupaten Sukoharjo, Jawa Tengah 57161.
+         </p>
+         <div class="mt-4">
+          <p class="font-bold">
+           Customer Service Hotline
+          </p>
+          <p class="text-2xl font-bold">
+           11223344
+          </p>
+         </div>
+        </div>
+        <div>
+         <h2 class="font-bold mb-2">
+          Tentang TECH RIDER 
+         </h2>
+         <ul>
+          <li>
+           <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+            Profil Perusahaan
+           </a>
+          </li>
+          <li>
+           <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+            FAQ
+           </a>
+          </li>
+         </ul>
+        </div>
+        <div>
+         <h2 class="font-bold mb-2">
+          Quick Link
+         </h2>
+         <ul>
+          <li>
+           <a class="transition-colors duration-300 hover:text-gray-400" href="index.html">
+            Home
+           </a>
+          </li>
+          <li>
+           <a class="transition-colors duration-300 hover:text-gray-400" href="product(2).html">
+            Product
+           </a>
+          </li>
+          <li>
+           <a class="transition-colors duration-300 hover:text-gray-400" href="about us.html">
+            About
+           </a>
+          </li>
+         </ul>
+        </div>
+        <div>
+         <h2 class="font-bold mb-2">
+          Media Sosial
+         </h2>
+         <div class="flex space-x-4 mb-4">
+          <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+           <i class="fab fa-facebook-f">
+           </i>
+          </a>
+          <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+           <i class="fab fa-twitter">
+           </i>
+          </a>
+          <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+           <i class="fab fa-instagram">
+           </i>
+          </a>
+          <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+           <i class="fab fa-youtube">
+           </i>
+          </a>
+          <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+           <i class="fab fa-linkedin-in">
+           </i>
+          </a>
+          <a class="transition-colors duration-300 hover:text-gray-400" href="#">
+           <i class="fab fa-tiktok">
+           </i>
+          </a>
+         </div>
+        </div>
+       </div>
+      </div>
+     </footer>
+<script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("dot");
+      
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      
+      for (let i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      
+      slides[slideIndex - 1].style.display = "block";
+      dots[slideIndex - 1].className += " active";
+    }
+
+    function openTestRideModal() {
+      document.getElementById('testRideModal').classList.remove('hidden');
+      document.getElementById('testRideModal').classList.add('flex');
+    }
+
+    function closeTestRideModal() {
+      document.getElementById('testRideModal').classList.remove('flex');
+      document.getElementById('testRideModal').classList.add('hidden');
+    }
+
+    document.getElementById('testRideForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Add form submission logic here (e.g., send data to server)
+      alert('Test Ride request submitted!');
+      closeTestRideModal();
+    });
+  </script>
+
+    <script>
+        // Animation on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            gsap.from('#logo', { 
+                opacity: 0, 
+                y: -50, 
+                duration: 1, 
+                ease: 'power3.out' 
+            });
+            
+            gsap.from('main section', { 
+                opacity: 0, 
+                x: -50, 
+                stagger: 0.2, 
+                duration: 1 
+            });
+        });
+
+        function showModal(type) {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('modalContent');
+            const title = document.getElementById('modalTitle');
+            const body = document.getElementById('modalBody');
+
+            overlay.classList.remove('hidden');
+            
+            // Small delay for animation
+            setTimeout(() => {
+                modal.classList.remove('scale-75', 'opacity-0');
+            }, 50);
+
+            if (type === 'contact') {
+                title.textContent = 'Hubungi Kami';
+                body.innerHTML = `
+                    <p>Email: info@techrider.com</p>
+                    <p>Telepon: +62 812-3456-7890</p>
+                    <p>Alamat: Jakarta, Indonesia</p>
+                `;
+            } else if (type === 'products') {
+                title.textContent = 'Produk Kami';
+                body.innerHTML = `
+                    <ul>
+                        <li>TVS Apache Series</li>
+                        <li>TVS NTorq</li>
+                        <li>TVS Jupiter</li>
+                    </ul>
+                `;
+            }
+        }
+
+        function closeModal() {
+            const overlay = document.getElementById('modalOverlay');
+            const modal = document.getElementById('modalContent');
+
+            modal.classList.add('scale-75', 'opacity-0');
+            
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 300);
+        }
+    </script>
+     <script>
+        function tvsSoloShowDetails() {
+            const modal = document.getElementById('tvs-solo-modal');
+            const modalContent = document.getElementById('tvs-solo-modal-content');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            gsap.to(modalContent, {
+                scale: 1, 
+                duration: 0.5, 
+                ease: 'back.out(1.7)'
+            });
+        }
+
+        function tvsSoloCloseModal(event) {
+            const modal = document.getElementById('tvs-solo-modal');
+            const modalContent = document.getElementById('tvs-solo-modal-content');
+
+            if (event && event.target !== modal) return;
+
+            gsap.to(modalContent, {
+                scale: 0, 
+                duration: 0.3, 
+                ease: 'power2.in',
+                onComplete: () => {
+                    modal.classList.remove('flex');
+                    modal.classList.add('hidden');
+                }
+            });
+        }
+
+        function tvsSoloContactUs() {
+            alert('Terima kasih! Tim kami akan segera menghubungi Anda.');
+        }
+
+        // GSAP Animations on Page Load
+        gsap.from('.tvs-solo-hero-section', {
+            opacity: 0, 
+            y: 50, 
+            duration: 1, 
+            ease: 'power3.out'
+        });
+
+        gsap.from('.tvs-solo-text-section', {
+            opacity: 0, 
+            x: -50, 
+            duration: 1, 
+            delay: 0.5, 
+            ease: 'power3.out'
+        });
+    </script>
+</body>
+</html>
